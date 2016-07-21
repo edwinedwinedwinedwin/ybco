@@ -1,0 +1,65 @@
+<%= render "layouts/header" %>
+<%= yield %>
+
+<div class="page-main">
+  <%= stylesheet_link_tag "style" %>
+  <%= stylesheet_link_tag "component" %>
+  <%= javascript_include_tag "application"%>
+
+  <div class="page-section">
+     <legend class="form-heading heading"> Edit Profile </legend>
+<%= form_for :user,url: user_path(@user),method: :patch do |f| %>
+    <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><font color=red><%= msg %></font></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <p>
+      <div class="form-field">
+        <%= f.text_field :first_name, class: "form-input"%>
+        <label class="form-label" for="first-name">First Name</label>
+      </div>
+    </p>
+    
+    <p>
+     <div class="form-field">
+      <%= f.text_field :last_name, class: "form-input" %>
+      <label class="form-label" for="last-name">Last Name</label>
+      </div>
+    </p>
+
+    <p>
+     <div class="form-field">
+      <%= f.text_field :address, class: "form-input" %>
+      <label class="form-label" for="address">Home Address</label>
+      </div>
+    </p>
+    
+    <p>
+     <div class="form-field">
+      <%= f.text_field :email, class: "form-input" %>
+      <label class="form-label" for="email">Email</label>
+      </div>
+    </p>
+    
+    <p>
+    <div class="form-actions">
+      <%= f.submit "SUBMIT", class: "button--stroke--long" %>
+      </div>
+    </p>
+    <% end %>
+
+    <p>
+    <div class="form-actions">
+    <%= link_to 'BACK', "../../dashboards/index" %>
+    </div>
+    </p>
+  </div>
+</div>
+
+<%= render "layouts/footer" %>
+<%= yield %>

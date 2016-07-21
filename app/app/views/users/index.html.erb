@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Manage Users</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>      
+      <th>Email</th>      
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Address</th>
+      <th>Banned Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <% if !user.is_admin %>
+      <tr>        
+        <td><%= user.email %></td>        
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.address %></td>        
+        <td><% if user.is_banned %>
+              <font color=red><b><%= "Yes" %></b></font>
+            <% else %>
+              <font color=green><b><%= "No" %></b></font>
+            <% end %>
+        </td>
+        <td>
+        <% if !user.is_banned %>
+              <b><%= link_to 'Ban', {:controller => "users", :action => "ban", :id => user.id }, {:method=>:post} %></b>
+            <% else %>
+              <b><%= link_to 'Un-Ban', {:controller => "users", :action => "unban", :id => user.id } , {:method=>:post} %></b>
+            <% end %>
+        </td>                
+        <!-- <td><%# link_to 'Delete', user, method: :delete%></td> -->
+      </tr>
+      <% end %> 
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', {:controller => "admins", :action => "index" } %>

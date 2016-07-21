@@ -1,0 +1,53 @@
+<div class="page-main">
+  <%= stylesheet_link_tag "style" %>
+  <%= stylesheet_link_tag "component" %>
+  <%= javascript_include_tag "application"%>
+
+  <div class="page-section">
+    <legend class="form-heading heading"> Log In </legend>
+      <%= form_tag('/sessions/create') do |f| %>    
+          <% if flash[:alert] %>
+              <div class="alert alert-danger" role="alert">
+                <b><u>Errors:</u></b>
+                <ul>
+                  <li><%= flash[:alert] %></li>
+                </ul>
+              </div>
+          <% end %>
+          <p>
+          <div class="form-field">
+            <%= text_field_tag :email, nil,class: "form-input" %>
+            <label class="form-label" for="email">Email</label>
+          </div>
+          </p>
+
+          <p>
+          <div class="form-field">
+            <%= password_field_tag :password,nil, class: "form-input" %>
+            <label class="form-label" for="password">Password</label>
+          </div>
+          </p>
+
+          <p>
+          <div class="form-actions">
+            <%= submit_tag "LOGIN", class: "button--stroke--long" %>
+          </div>
+          </p>
+
+          <p>
+            <div class="form-actions">
+              <%= link_to "Back", controller: "pages", action: "home", class: "button--stroke--long" %>
+            </div>
+          </p>
+      <% end %>
+
+      <!-- Display parameters -->
+      <!--<hr/>
+      <!-- Inspecting Parameters
+      <%=params.inspect%>
+      Inspecting Session Parameters
+      <%= @failed %><br>
+      Session ID is <%= session[:user_id] %><br>
+      User is <%= @user %><br> -->
+  </div>
+</div>
